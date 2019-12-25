@@ -138,7 +138,7 @@ export const SupportForm = ({
                   unmountOnExit
                 >
                   {typeof children === 'function'
-                    ? children({
+                    ? (children as any)({
                         values,
                         setValue,
                         setCustomField,
