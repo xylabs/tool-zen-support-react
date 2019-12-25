@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>COIN Support Example</title>
+</head>
+<body>
+  <div id="support-root"></div>
+  <button id="support-btn">Contact Support</button>
+  <script>
+    var process = { env: {} }
+  </script>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.production.min.js"></script>
+  <script src="../dist/support.js"></script>
+  <script>
+    var supportRoot = document.getElementById('support-root')
+    var supportBtn = document.getElementById('support-btn')
+    
+    ZenSupport.renderCoinSupportForm(supportRoot, function (form) {
+      function openForm () {
+        form.setOpen(true)
+      }
+      
+      function closeForm () {
+        form.setOpen(false)
+      }
+
+      supportBtn.addEventListener('click', openForm)
+
+      return function () {
+        supportBtn.removeEventListener('click', openForm)
+      }
+    })
+    
+  </script>
+</body>
+</html>
