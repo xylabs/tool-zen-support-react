@@ -1,7 +1,7 @@
 {
   "name": "@xyo-network/tool-zen-support-react",
   "version": "0.0.0-development",
-  "description": "",
+  "description": "React widget to create support tickets in Zendesk",
   "keywords": [],
   "main": "dist/tool-zen-support-react.umd.js",
   "module": "dist/tool-zen-support-react.es5.js",
