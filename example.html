@@ -5,10 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>COIN Support Example</title>
+  <style>
+    .center-contents {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .waves-effect {
+      position: relative;
+      cursor: pointer;
+      display: inline-block;
+      overflow: hidden;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      vertical-align: middle;
+      z-index: 1;
+      -webkit-transition: .3s ease-out;
+      transition: .3s ease-out;
+    }
+    .btn {
+      text-decoration: none;
+      color: #fff;
+      background-color: #26a69a;
+      text-align: center;
+      letter-spacing: .5px;
+      -webkit-transition: background-color .2s ease-out;
+      transition: background-color .2s ease-out;
+      cursor: pointer;
+      border: none;
+      border-radius: 2px;
+      display: inline-block;
+      height: 36px;
+      line-height: 36px;
+      padding: 0 16px;
+      text-transform: uppercase;
+      vertical-align: middle;
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
 </head>
 <body>
   <div id="support-root"></div>
-  <button id="support-btn">Contact Support</button>
+  <div class="center-contents" style="height: 100vh">
+    <button id="support-btn" class="waves-effect btn">Contact Support</button>
+  </div>
   <script>
     var process = { env: {} }
   </script>
