@@ -12,7 +12,7 @@
   "author": "Ryan <ryan.hansen@xy.company>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/xylabs/tool-zen-support-react"
   },
   "license": "MIT",
   "engines": {
@@ -22,7 +22,7 @@
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "generate": "node generate.js",
     "prebuild": "rimraf dist && npm run generate",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src && cp example.html docs/example.html",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
