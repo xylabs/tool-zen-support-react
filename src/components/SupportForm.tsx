@@ -15,7 +15,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
 import * as React from 'react'
 import { useCaptchaControls } from '../hooks/captchaControls'
 import { useSupportControls, defaultTicketFormatter } from '../hooks/supportControls'
-import { PlatformField, PrimaryTopicField, SecondaryTopicField } from './SupportCustomFields'
+import { fieldsByName } from './SupportCustomFields'
 import { SupportEmail, SupportSubject, SupportDescription } from './SupportFields'
 import { SupportDetails } from './SupportDetails'
 import coinTheme from '../themes/coin'
@@ -48,9 +48,9 @@ export const SupportForm = ({
     SupportEmail,
     SupportSubject,
     SupportDescription,
-    PrimaryTopicField,
-    SecondaryTopicField,
-    PlatformField,
+    fieldsByName.PrimaryTopic.TextField,
+    fieldsByName.SecondaryTopic.TextField,
+    fieldsByName.Platform.TextField,
     // SupportAttachments,
     SupportDetails
   ]
@@ -120,17 +120,7 @@ export const SupportForm = ({
             }}
           >
             <form onSubmit={handleSubmit} style={{ width: 600, maxWidth: '100%' }}>
-              {(steps || []).map((children, i) => [
-                <Slide
-                  key={`${i}_title`}
-                  direction={i === activeStep ? 'up' : 'down'}
-                  in={i === activeStep}
-                  unmountOnExit
-                >
-                  <Typography variant="h5" style={{ marginBottom: '1rem' }}>
-                    Submit Support Request
-                  </Typography>
-                </Slide>,
+              {(steps || []).map((children, i) => 
                 <Slide
                   key={`${i}_input`}
                   direction={i === activeStep ? 'up' : 'down'}
@@ -148,7 +138,7 @@ export const SupportForm = ({
                       })
                     : children}
                 </Slide>
-              ])}
+              )}
             </form>
           </div>
           <div style={{ flexGrow: 1 }} />
