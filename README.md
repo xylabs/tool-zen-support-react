@@ -58,6 +58,8 @@ import { CoinSupportForm } from '@xyo-network/tool-zen-support-react'
 ### Features
 
  - Submit Ticket To Zendesk
+ - Configure Form Through Zendesk
+ - Continuous Deployment
 
 ### TODO
 
