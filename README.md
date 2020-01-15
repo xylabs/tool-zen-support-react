@@ -2,7 +2,7 @@
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 <!-- [![Greenkeeper badge](https://badges.greenkeeper.io/xylabs/tool-zen-support-react.svg)](https://greenkeeper.io/) -->
-[![Travis](https://img.shields.io/travis/xylabs/tool-zen-support-react.svg)](https://travis-ci.org/xylabs/tool-zen-support-react)
+[![Travis](https://travis-ci.com/xylabs/tool-zen-support-react.svg?branch=master)](https://travis-ci.com/xylabs/tool-zen-support-react)
 <!-- [![Coveralls](https://img.shields.io/coveralls/xylabs/tool-zen-support-react.svg)](https://coveralls.io/github/xylabs/tool-zen-support-react) -->
 [![Dev Dependencies](https://david-dm.org/xylabs/tool-zen-support-react/dev-status.svg)](https://david-dm.org/xylabs/tool-zen-support-react?type=dev)
 
