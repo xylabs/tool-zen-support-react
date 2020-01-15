@@ -18,6 +18,7 @@ import { useSupportControls, defaultTicketFormatter } from '../hooks/supportCont
 import { fieldsByName } from './SupportCustomFields'
 import { SupportEmail, SupportSubject, SupportDescription } from './SupportFields'
 import { SupportDetails } from './SupportDetails'
+import CssBaseline from '@material-ui/core/CssBaseline'
 import coinTheme from '../themes/coin'
 
 interface ISupportFormProps {
@@ -48,9 +49,9 @@ export const SupportForm = ({
     SupportEmail,
     SupportSubject,
     SupportDescription,
-    fieldsByName.PrimaryTopic.TextField,
+    fieldsByName.PrimaryTopic.Select,
     fieldsByName.SecondaryTopic.TextField,
-    fieldsByName.Platform.TextField,
+    fieldsByName.Platform.Select,
     // SupportAttachments,
     SupportDetails
   ]
@@ -61,10 +62,11 @@ export const SupportForm = ({
     { setError: setRecaptchaError }
   ] = useCaptchaControls({ key: recaptchaKey, action: recaptchaAction })
   const [
-    { activeStep, loading, error: supportError, values },
+    { activeStep, prevStep, loading, error: supportError, values },
     {
       setValue,
       setCustomField,
+      selectCustomField,
       setActiveStep,
       handleBack,
       handleNext,
@@ -103,27 +105,29 @@ export const SupportForm = ({
             position: 'absolute'
           }}
         >
-          {onClose ? <div style={{ textAlign: 'right', padding: 8 }}>
-            <IconButton onClick={onClose}>
-              <Close />
-            </IconButton>
-          </div> : null}
           <div
             style={{
-              padding: 8,
-              paddingBottom: 12,
+              padding: 80,
+              paddingLeft: 12,
+              paddingRight: 12,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexDirection: 'column',
-              flexGrow: 2
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              height: "100%",
+              width: "100%",
+              overflow: "auto",
+              WebkitOverflowScrolling: "touch"
             }}
           >
             <form onSubmit={handleSubmit} style={{ width: 600, maxWidth: '100%' }}>
               {(steps || []).map((children, i) => 
                 <Slide
                   key={`${i}_input`}
-                  direction={i === activeStep ? 'up' : 'down'}
+                  direction={prevStep > activeStep ? 'down' : 'up'}
                   in={i === activeStep}
                   unmountOnExit
                 >
@@ -132,6 +136,7 @@ export const SupportForm = ({
                         values,
                         setValue,
                         setCustomField,
+                        selectCustomField,
                         setActiveStep,
                         loading,
                         error: recaptchaError || supportError
@@ -141,6 +146,11 @@ export const SupportForm = ({
               )}
             </form>
           </div>
+          {onClose ? <div style={{ textAlign: 'right', padding: 8, position: "absolute", top: 0, right: 0 }}>
+            <IconButton onClick={onClose}>
+              <Close />
+            </IconButton>
+          </div> : null}
           <div style={{ flexGrow: 1 }} />
           {activeStep === stepCount - 1 ? null : (
             <MobileStepper
@@ -199,6 +209,7 @@ export const SupportForm = ({
 export const CoinSupportForm = (props: ISupportFormProps & Partial<ISupportFormOptions>) => {
   return (
     <ThemeProvider theme={coinTheme}>
+      <CssBaseline />
       <SupportForm 
         recaptchaKey="6LcJyckUAAAAAG66729AOeCo2WMHEoVCP5IfSZsf"
         createTicketUri="https://us-central1-xyo-network-1522800011804.cloudfunctions.net/coin_subscriptions/create-zen-ticket"

@@ -18,6 +18,7 @@ export interface ISupportOptions {
 }
 
 export interface ISupportValues {
+  prevStep: number
   activeStep: number
   loading: boolean
   error: string
@@ -26,8 +27,9 @@ export interface ISupportValues {
 
 export interface ISupportActions {
   setValue: (name: string, value: any) => void
-  setCustomField: (name: string, value: any) => void
   setActiveStep: (step: number) => void
+  selectCustomField: (name: string, value: any) => void
+  setCustomField: (name: string, value: any) => void
   setError: (error: string) => void
   handleBack: () => void
   handleNext: () => void
@@ -61,19 +63,26 @@ export function useSupportControls({
   onError
 }: ISupportOptions): [ISupportValues, ISupportActions] {
   const stepCount = (steps || []).length
-  const [activeStep, setActiveStep] = React.useState(0)
+  const [{ activeStep, prevStep }, setStep] = React.useState({ activeStep: 0, prevStep: 0 })
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState('')
   const [values, setValues] = React.useState<any>({
     custom_fields: {},
     ...initial
   })
+  const setActiveStep = (nextStep: number) => {
+    setStep(({ activeStep }) => ({ prevStep: activeStep, activeStep: nextStep }))
+  }
   const setValue = (name: string, value: any) => setValues((vs: any) => ({ ...vs, [name]: value }))
   const setCustomField = (name: string, value: any) =>
     setValues((vs: any) => ({
       ...vs,
       custom_fields: { ...vs.custom_fields, [name]: value }
     }))
+  const selectCustomField = (name: string, value: any) => {
+    setCustomField(name, value)
+    handleNext()
+  }
   const handleBack = () => setActiveStep(activeStep - 1)
   const handleNext = () => setActiveStep(activeStep + 1)
   const handleSubmit = async (ev?: any) => {
@@ -108,6 +117,7 @@ export function useSupportControls({
 
   return [
     {
+      prevStep,
       activeStep,
       loading,
       error,
@@ -116,6 +126,7 @@ export function useSupportControls({
     {
       setValue,
       setCustomField,
+      selectCustomField,
       setActiveStep,
       setError,
       handleBack,
