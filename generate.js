@@ -11,7 +11,8 @@ const headers = {
 }
 
 function handleError (err) {
-  console.log('Error', err)
+  console.log('GENERATE ERROR', err)
+  process.exit(1)
 }
 
 function toFaIcon (fieldName) {
@@ -48,10 +49,11 @@ function toMaterialUiIcon (fieldName) {
   }
 }
 
-function handleResult({ ticket_fields }) {
+function handleResult(result) {
+  const { ticket_fields, error } = result
+  if (error) throw new Error(error)
   const imports = uniq(flatten(ticket_fields.map((v) => {
     return flatten((v.custom_field_options || []).map(({ value }) => {
-      console.log(value)
       const icon = toMaterialUiIcon(value) 
       if (icon) return [`import ${icon}Icon from '@material-ui/icons/${icon}'`, `export { default as ${icon}Icon } from '@material-ui/icons/${icon}'`]
       return []
